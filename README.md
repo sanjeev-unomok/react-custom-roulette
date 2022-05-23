@@ -63,7 +63,7 @@ export default () => (
 #### Props
 
 | **Prop**                       | **Type**           | **Default**               | **Description**                                                                                       |
-| ------------------------------ | ------------------ | ------------------------- | ----------------------------------------------------------------------------------------------------- |
+|--------------------------------|--------------------|---------------------------|-------------------------------------------------------------------------------------------------------|
 | mustStartSpinning _(required)_ | `boolean`          | -                         | Sets when the roulette must start the spinning animation                                              |
 | prizeNumber _(required)_       | `number`           | -                         | Sets the winning option. It's value must be between 0 and data.lenght-1                               |
 | data _(required)_              | `Array<WheelData>` | -                         | Array of options. Can contain styling information for a specific option (see [WheelData](#wheeldata)) |
@@ -77,10 +77,12 @@ export default () => (
 | innerBorderWidth               | `number`           | 0                         | Width of the roulette's inner border line (0 represents no inner border line)                         |
 | radiusLineColor                | `string`           | 'black'                   | Color of the radial lines that separate each option                                                   |
 | radiusLineWidth                | `number`           | 5                         | Width of the radial lines that separate each option (0 represents no radial lines)                    |
+| fontFamily                      | `string`           | 'Helvetica, sans-serif'   | Global font family of the option string. Non-Web safe fonts are fetched from https://fonts.google.com/. All available fonts can be found there.            |
 | fontSize                       | `number`           | 20                        | Font size of the option string                                                                        |
 | perpendicularText              | `boolean`          | false                     | When 'true', sets the option texts perpendicular to the roulette's radial lines                       |
 | textDistance                   | `number [0..100]`  | 60                        | Distance of the option texts from the center of the roulette                                          |
-| spinDuration                   | `number [0.01 ..]` | 1.0                       | Coefficient to adjust the default spin duration                                                              |
+| spinDuration                   | `number [0.01 ..]` | 1.0                       | Coefficient to adjust the default spin duration                                                       |
+| selectorProps                  | `SelectorProps`    | { src: rouletteSelector } | Image source and CSS styling to apply to image.                                                       |
 
 ## Types
 
@@ -90,8 +92,11 @@ export default () => (
 interface WheelData {
   option: string;
   style?: StyleType; // Optional
+  optionSize?: number; // Optional
 }
 ```
+
+With `optionSize` you can set the size of the option measured in roulette pieces. For example: if `data` provides 2 options A and B, and you set A's `optionSize` to `2`, B's `optionSize` to `1`, the roulette will render `3` pieces: 2 corresponding to A and 1 corresponding to B. Therefore, A will appear to be twice as big as B. 
 
 #### StyleType
 
@@ -99,9 +104,38 @@ interface WheelData {
 interface StyleType {
   backgroundColor?: string; // Optional
   textColor?: string; // Optional
+  fontFamily?: string; // Optional
+  fontSize?: number; // Optional
 }
 ```
 
+#### SelectorProps
+
+```jsx
+interface SelectorProps {
+  src?: string; // Optional
+  style?: SelectorStyle; // Optional
+}
+```
+
+| **Prop** | **Type**        | **Default**               | **Description**             |
+|----------|-----------------|---------------------------|-----------------------------|
+| src      | `string`        | -                         | Image src.                  |
+| style    | `SelectorStyle` | -                         | Styling for selector image. |
+
+
+#### SelectorStyle
+
+```jsx
+interface SelectorStyle {
+  height?: number; // Optional
+  width?: number; // Optional
+}
+```
+| **Prop** | **Type** | **Default**               | **Description**            |
+|----------|----------|---------------------------|----------------------------|
+| height   | `number` | -                         | Image height CSS property. |
+| style    | `number` | -                         | Image width CSS property.  |
 ## Multi Spin
 
 #### Example (using useState)
@@ -152,8 +186,9 @@ This project exists thanks to all the people who contribute!
     <li><a href="https://github.com/nazabalm20">Martin Nazabal</a></li>
     <li><a href="https://github.com/jpmazza">JP Mazza</a></li>
     <li><a href="https://github.com/TakeshiOnishi">TakeshiOnishi</a></li>
+    <li><a href="https://github.com/Gaston-Gonzalez">Gastón González</a></li>
 </ul>
 
 ## License
 
-This project is licensed under the MIT license, Copyright (c) 2020 <a href="https://effectussoftware.com">Effectus Software</a>. [[License](LICENSE)]
+This project is licensed under the MIT license, Copyright (c) 2022 <a href="https://effectussoftware.com">Effectus Software</a>. [[License](LICENSE)]
