@@ -4,12 +4,18 @@ import './App.css';
 import { Wheel } from 'react-custom-roulette';
 
 const data = [
-  { option: 'REACT' },
+  { option: 'REACT', optionSize: 3 },
   { option: 'CUSTOM' },
-  { option: 'ROULETTE', style: { textColor: '#f9dd50' } },
+  {
+    option: 'ROULETTE',
+    style: {
+      textColor: '#f9dd50',
+      fontFamily: 'Ubuntu',
+    },
+  },
   { option: 'WHEEL' },
   { option: 'REACT' },
-  { option: 'CUSTOM' },
+  { option: 'CUSTOM', style: { textColor: 'white' } },
   { option: 'ROULETTE', style: { textColor: '#70bbe0' } },
   { option: 'WHEEL' },
 ];
@@ -23,7 +29,8 @@ const innerBorderWidth = 0;
 const innerRadius = 0;
 const radiusLineColor = '#eeeeee';
 const radiusLineWidth = 8;
-const fontSize = 17;
+const fontFamily = 'Nunito';
+const fontSize = 20;
 const textDistance = 60;
 const spinDuration = 1.0;
 
@@ -32,7 +39,7 @@ const App = () => {
   const [prizeNumber, setPrizeNumber] = useState(0);
 
   const handleSpinClick = () => {
-    const newPrizeNumber = Math.floor(Math.random() * data.length);
+    const newPrizeNumber = 0;
     setPrizeNumber(newPrizeNumber);
     setMustSpin(true);
   };
@@ -46,6 +53,7 @@ const App = () => {
           data={data}
           backgroundColors={backgroundColors}
           textColors={textColors}
+          fontFamily={fontFamily}
           fontSize={fontSize}
           outerBorderColor={outerBorderColor}
           outerBorderWidth={outerBorderWidth}
